@@ -30,7 +30,7 @@ kotlinx_serialization_json = "1.6.2"
 ktor = "2.3.8"
 material = "1.11.0"
 # @keep
-minSdk = "21"
+minSdk = "24"
 secrets = "2.0.1"
 # @keep
 targetSdk = "34"
