@@ -9,17 +9,23 @@ plugins {
 }
 
 android {
-    namespace = "com.example.mugss"
+    namespace = "com.mugss.mugss"
     compileSdk = libs.versions.compileSdk.get().toInt()
 
+    buildFeatures {
+        buildConfig = true
+    }
+
     defaultConfig {
-        applicationId = "com.example.mugss"
+        applicationId = "com.mugss.mugss"
         minSdk = libs.versions.minSdk.get().toInt()
         targetSdk = libs.versions.targetSdk.get().toInt()
         versionCode = 1
         versionName = "1.0"
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField("String", "CLIENT_ID", "\"${System.getenv("CLIENT_ID")}\"")
+        buildConfigField("String", "CLIENT_SECRET", "\"${System.getenv("CLIENT_SECRET")}\"")
+
         vectorDrawables {
             useSupportLibrary = true
         }
@@ -55,10 +61,6 @@ android {
 }
 
 dependencies {
-
-    //Desugaring
-    coreLibraryDesugaring(libs.core.jdk.desugaring)
-
     //Coroutines
     implementation(libs.kotlinx.coroutines.android)
 
@@ -94,22 +96,19 @@ dependencies {
         implementation(lifecycle.viewModelCompose)
 
         //Compose
-        val composeBom = platform(compose.bom)
         implementation(activity.compose)
-        implementation(composeBom)
+        implementation(compose.bom)
         implementation(compose.ui)
         implementation(compose.ui.graphics)
         implementation(compose.ui.tooling.preview)
-        implementation(compose.material3)
 
-        androidTestImplementation(test.ext.junit)
-        androidTestImplementation(test.espresso.core)
-        androidTestImplementation(composeBom)
-        androidTestImplementation(compose.ui.test.junit4)
         debugImplementation(compose.ui.tooling)
         debugImplementation(compose.ui.test.manifest)
     }
     testImplementation(libs.junit)
+
+    implementation(project(":core:data"))
+    implementation(project(":core:network"))
 }
 
 // Allow references to generated code
