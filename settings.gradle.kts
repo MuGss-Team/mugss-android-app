@@ -15,4 +15,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "MuGss"
 include(":app")
- 
+include(":core:network")
+include(":core:data")
