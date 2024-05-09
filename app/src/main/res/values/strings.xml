@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">MuGss</string>
+    <string name="welcome">Добро\nпожаловать!</string>
+    <string name="login">Логин:</string>
+    <string name="email">Почта:</string>
+    <string name="password">Пароль:</string>
+    <string name="password_confirmation">Подтверждение пароля:</string>
+    <string name="registrate">Зарегистрироваться</string>
 </resources>

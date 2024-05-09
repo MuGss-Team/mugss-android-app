@@ -1,9 +1,9 @@
 [versions]
 androidGradlePlugin = "8.3.1"
-androidx-activity-compose = "1.8.2"
+androidx-activity-compose = "1.9.0"
 androidx-appcompat = "1.6.1"
-androidx-compose-bom = "2024.04.00"
-androidx-corektx = "1.13.0-beta01"
+androidx-compose-bom = "2024.05.00"
+androidx-corektx = "1.13.1"
 androidx-lifecycle-compose = "2.7.0"
 androidx-lifecycle-runtime-compose = "2.7.0"
 androidx-navigation = "2.7.7"
@@ -17,17 +17,17 @@ coil = "2.5.0"
 # @keep
 compileSdk = "34"
 compose-compiler = "1.5.4"
-coroutines = "1.7.3"
+coroutines = "1.8.0"
 gradle-versions = "0.50.0"
-hilt = "2.50"
+hilt = "2.51.1"
 hiltExt = "1.2.0"
 junit = "4.13.2"
 # @pin Update in conjuction with Compose Compiler
 kotlin = "1.9.20"
 kotlinx_immutable = "0.3.7"
 kotlinx_serialization_json = "1.6.2"
-ktor = "2.3.8"
-material = "1.11.0"
+ktor = "2.3.10"
+material = "1.12.0"
 # @keep
 minSdk = "24"
 secrets = "2.0.1"
@@ -35,7 +35,7 @@ secrets = "2.0.1"
 targetSdk = "34"
 version-catalog-update = "0.8.3"
 org-jetbrains-kotlin-jvm = "1.9.20"
-firebaseCrashlyticsBuildtools = "2.9.9"
+firebaseCrashlyticsBuildtools = "3.0.0"
 browser = "1.8.0"
 
 
@@ -45,7 +45,6 @@ androidx-activity-ktx = { module = "androidx.activity:activity-ktx", version.ref
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "androidx-appcompat" }
 androidx-compose-animation = { module = "androidx.compose.animation:animation" }
 androidx-compose-bom = { module = "androidx.compose:compose-bom", version.ref = "androidx-compose-bom" }
-androidx-compose-material = { module = "androidx.compose.material:material" }
 androidx-compose-material-iconsExtended = { module = "androidx.compose.material:material-icons-extended" }
 androidx-compose-material3 = { module = "androidx.compose.material3:material3" }
 androidx-compose-materialWindow = { module = "androidx.compose.material3:material3-window-size-class" }

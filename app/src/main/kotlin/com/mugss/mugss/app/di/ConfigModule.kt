@@ -1,4 +1,4 @@
-package com.mugss.mugss.di
+package com.mugss.mugss.app.di
 
 import com.mugss.core.network.api.ClientId
 import com.mugss.core.network.api.ClientSecret

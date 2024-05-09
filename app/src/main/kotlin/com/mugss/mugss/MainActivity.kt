@@ -2,10 +2,12 @@ package com.mugss.mugss
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
-import androidx.lifecycle.lifecycleScope
+import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
+import com.mugss.core.compose.theme.MuGssTheme
 import com.mugss.core.network.api.token.TokenRefresher
+import com.mugss.mugss.app.registration.RegistrationScreen
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -15,9 +17,12 @@ class MainActivity : ComponentActivity() {
     lateinit var tokenRefresher: TokenRefresher
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        enableEdgeToEdge()
         super.onCreate(savedInstanceState)
-        lifecycleScope.launch {
-            tokenRefresher.refreshToken()
+        setContent {
+            MuGssTheme {
+                RegistrationScreen()
+            }
         }
     }
 }
