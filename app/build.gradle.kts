@@ -97,8 +97,9 @@ dependencies {
 
         //Compose
         implementation(activity.compose)
-        implementation(compose.bom)
+        implementation(platform(compose.bom))
         implementation(compose.ui)
+        implementation(compose.material3)
         implementation(compose.ui.graphics)
         implementation(compose.ui.tooling.preview)
 
@@ -109,6 +110,7 @@ dependencies {
 
     implementation(project(":core:data"))
     implementation(project(":core:network"))
+    implementation(project(":core:compose"))
 }
 
 // Allow references to generated code
