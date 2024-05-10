@@ -1,6 +1,5 @@
 package com.mugss.mugss.app.registration
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -16,7 +15,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.mugss.core.compose.buttons.MugssTextButton
 import com.mugss.core.compose.input.MuGssInput
-import com.mugss.core.compose.theme.MuGssTheme
+import com.mugss.core.compose.theme.colors.radialGradientPrimaryBackground
 import com.mugss.mugss.R
 import com.mugss.mugss.app.registration.stateholder.RegistrationViewModel
 
@@ -31,7 +30,7 @@ fun RegistrationScreen(
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(MuGssTheme.colors.primary)
+            .radialGradientPrimaryBackground()
             .safeDrawingPadding()
             .verticalScroll(rememberScrollState()),
         contentAlignment = Alignment.Center,
@@ -63,7 +62,7 @@ fun RegistrationScreen(
                     .padding(horizontal = 40.dp)
                     .padding(top = 22.dp, bottom = 36.dp),
                 text = stringResource(id = R.string.registrate),
-                onClick = { /*TODO*/ }
+                onClick = registrationViewModel::onRegisterClick
             )
         }
     }

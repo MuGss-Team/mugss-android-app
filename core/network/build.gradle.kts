@@ -28,7 +28,9 @@ dependencies {
         implementation(logging.jvm)
         implementation(content.negotiation)
     }
-    implementation(libs.ktor.serialization.kotlinx.json)
+    //Firebase
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.auth)
 
     kapt(libs.hilt.compiler)
     implementation(libs.androidx.core.ktx)

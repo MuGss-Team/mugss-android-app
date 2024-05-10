@@ -9,6 +9,7 @@ internal val LocalMuGssColor = staticCompositionLocalOf<MugssColor> {
 
 data class MugssColor(
     val primary: Color,
+    val secondary: Color,
     val white: Color,
     val black: Color,
     val gray: Color,
@@ -18,6 +19,7 @@ data class MugssColor(
 
 fun lightColor() = MugssColor(
     primary = Color(0xFF468FAF),
+    secondary = Color(0xFF575EAE),
     white = Color(0xFFFFFFFF),
     black = Color(0xFF000000),
     gray = Color(0xFFBCBCBC),
