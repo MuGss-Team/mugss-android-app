@@ -14,9 +14,19 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-interface DataModule {
+internal interface DataModule {
 
     companion object {
+
+        @Provides
+        @Singleton
+        @UserPrefs
+        fun provideUserPrefs(
+            @ApplicationContext context: Context,
+        ): SharedPreferences = context.getSharedPreferences(
+            USER_PREFS,
+            Context.MODE_PRIVATE,
+        )
 
         @Provides
         internal fun provideMasterKey(@ApplicationContext context: Context): MasterKey {
@@ -64,5 +74,6 @@ interface DataModule {
         }
 
         private const val TOKEN_STORE = "token_store"
+        private const val USER_PREFS = "user_prefs"
     }
 }

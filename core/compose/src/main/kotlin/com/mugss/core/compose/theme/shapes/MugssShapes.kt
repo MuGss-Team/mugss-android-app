@@ -14,4 +14,5 @@ data class MugssShapes(
         topStart = 20.dp,
         topEnd = 20.dp,
     ),
+    val roundedCorner5: RoundedCornerShape = RoundedCornerShape(5.dp),
 )

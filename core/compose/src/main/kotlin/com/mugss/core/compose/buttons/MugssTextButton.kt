@@ -17,6 +17,7 @@ fun MugssTextButton(
     text: String,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
+    enabled: Boolean = true,
 ) {
     Button(
         modifier = modifier.height(50.dp),
@@ -25,7 +26,9 @@ fun MugssTextButton(
         colors = ButtonDefaults.buttonColors(
             containerColor = MuGssTheme.colors.primary,
             contentColor = MuGssTheme.colors.white,
-        )
+            disabledContainerColor = MuGssTheme.colors.gray,
+        ),
+        enabled = enabled,
     ) {
         Text(
             text = text,

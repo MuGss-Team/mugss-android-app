@@ -103,6 +103,7 @@ dependencies {
         implementation(compose.material3)
         implementation(compose.ui.graphics)
         implementation(compose.ui.tooling.preview)
+        implementation(navigation.compose)
 
         debugImplementation(compose.ui.tooling)
         debugImplementation(compose.ui.test.manifest)
@@ -111,10 +112,12 @@ dependencies {
 
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.auth)
+    implementation(libs.firebase.firestore)
 
     implementation(project(":core:data"))
     implementation(project(":core:network"))
     implementation(project(":core:compose"))
+    implementation(project(":core:navigation"))
 }
 
 // Allow references to generated code

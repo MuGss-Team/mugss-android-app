@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">MuGss</string>
     <string name="welcome">Добро\nпожаловать!</string>
+    <string name="create_account">Создать\nаккаунт</string>
+    <string name="enter">Войти</string>
+    <string name="remember_me">Запомнить меня</string>
+    <string name="trigger_to_register">Нет аккаунта?\nзарегистрируйся</string>
     <string name="login">Логин:</string>
     <string name="email">Почта:</string>
     <string name="password">Пароль:</string>
