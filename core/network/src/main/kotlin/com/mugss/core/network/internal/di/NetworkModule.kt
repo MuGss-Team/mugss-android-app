@@ -1,10 +1,14 @@
 package com.mugss.core.network.internal.di
 
+import com.google.firebase.Firebase
+import com.google.firebase.auth.auth
 import com.mugss.core.data.token.TokenStore
 import com.mugss.core.network.api.ClientId
 import com.mugss.core.network.api.ClientSecret
-import com.mugss.core.network.api.MuGssApi
 import com.mugss.core.network.api.spotify.SpotifyApi
+import com.mugss.core.network.api.user.UserRepository
+import com.mugss.core.network.internal.MuGssApi
+import com.mugss.core.network.internal.user.UserRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -28,12 +32,20 @@ import kotlin.io.encoding.ExperimentalEncodingApi
 
 @Module
 @InstallIn(SingletonComponent::class)
-interface NetworkModule {
+internal interface NetworkModule {
 
     @Binds
     fun bindPlaylistApi(muGssApi: MuGssApi): SpotifyApi
 
+    @Binds
+    fun userInfoRepository(userRepositoryImpl: UserRepositoryImpl): UserRepository
+
     companion object {
+
+        @Singleton
+        @Provides
+        fun firebaseAuth() = Firebase.auth
+
 
         @Singleton
         @Provides
