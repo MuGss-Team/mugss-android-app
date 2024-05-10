@@ -4,6 +4,14 @@ import android.content.SharedPreferences
 import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
 
+internal fun SharedPreferences.boolean(key: String, defValue: Boolean) =
+    property(
+        SharedPreferences::getBoolean,
+        SharedPreferences.Editor::putBoolean,
+        key,
+        defValue
+    )
+
 internal fun SharedPreferences.string(key: String, defValue: String) =
     property(
         SharedPreferences::getStringNotNull,
