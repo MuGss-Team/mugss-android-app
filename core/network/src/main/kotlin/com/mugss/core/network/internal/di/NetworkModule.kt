@@ -5,10 +5,10 @@ import com.google.firebase.auth.auth
 import com.mugss.core.data.token.TokenStore
 import com.mugss.core.network.api.ClientId
 import com.mugss.core.network.api.ClientSecret
+import com.mugss.core.network.api.firebase.user.UserStore
 import com.mugss.core.network.api.spotify.SpotifyApi
-import com.mugss.core.network.api.user.UserRepository
 import com.mugss.core.network.internal.MuGssApi
-import com.mugss.core.network.internal.user.UserRepositoryImpl
+import com.mugss.core.network.internal.firebase.user.UserStoreImpl
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -37,15 +37,15 @@ internal interface NetworkModule {
     @Binds
     fun bindPlaylistApi(muGssApi: MuGssApi): SpotifyApi
 
+    @Singleton
     @Binds
-    fun userInfoRepository(userRepositoryImpl: UserRepositoryImpl): UserRepository
+    fun userStore(userStoreImpl: UserStoreImpl): UserStore
 
     companion object {
 
         @Singleton
         @Provides
         fun firebaseAuth() = Firebase.auth
-
 
         @Singleton
         @Provides
