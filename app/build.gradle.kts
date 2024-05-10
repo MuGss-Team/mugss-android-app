@@ -5,6 +5,7 @@ plugins {
         alias(hilt)
         alias(kapt)
         alias(kotlin.serialization)
+        alias(google.google.services)
     }
 }
 
@@ -107,6 +108,9 @@ dependencies {
         debugImplementation(compose.ui.test.manifest)
     }
     testImplementation(libs.junit)
+
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.auth)
 
     implementation(project(":core:data"))
     implementation(project(":core:network"))

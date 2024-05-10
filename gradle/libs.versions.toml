@@ -1,5 +1,5 @@
 [versions]
-androidGradlePlugin = "8.3.1"
+androidGradlePlugin = "8.4.0"
 androidx-activity-compose = "1.9.0"
 androidx-appcompat = "1.6.1"
 androidx-compose-bom = "2024.05.00"
@@ -36,6 +36,9 @@ targetSdk = "34"
 version-catalog-update = "0.8.3"
 org-jetbrains-kotlin-jvm = "1.9.20"
 firebaseCrashlyticsBuildtools = "3.0.0"
+firebase-bom = "33.0.0"
+google-google-services = "4.3.0"
+
 browser = "1.8.0"
 
 
@@ -94,17 +97,18 @@ ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx
 ktor-client-logging-jvm = { module = "io.ktor:ktor-client-logging-jvm", version.ref = "ktor" }
 ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
 secrets = { module = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin:secrets-gradle-plugin", version.ref = "secrets" }
-firebase-crashlytics-buildtools = { group = "com.google.firebase", name = "firebase-crashlytics-buildtools", version.ref = "firebaseCrashlyticsBuildtools" }
+firebase-crashlytics-buildtools = { group = "com.google.firebase", name = "firebase-crashlytics-buildtools" }
+firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebase-bom" }
+firebase-auth = { module = "com.google.firebase:firebase-auth" }
 androidx-browser = { group = "androidx.browser", name = "browser", version.ref = "browser" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
 android-library = { id = "com.android.library", version.ref = "androidGradlePlugin" }
-gradle-versions = { id = "com.github.ben-manes.versions", version.ref = "gradle-versions" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin"}
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 secrets = { id = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin", version.ref = "secrets" }
-version-catalog-update = { id = "nl.littlerobots.version-catalog-update", version.ref = "version-catalog-update" }
 org-jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "org-jetbrains-kotlin-jvm" }
+google-google-services = { id = "com.google.gms.google-services", version.ref = "google-google-services" }
