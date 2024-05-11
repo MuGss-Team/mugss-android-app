@@ -6,7 +6,7 @@ import com.mugss.core.data.token.TokenStore
 import com.mugss.core.network.api.ClientId
 import com.mugss.core.network.api.ClientSecret
 import com.mugss.core.network.api.firebase.user.UserStore
-import com.mugss.core.network.api.playlist.PlaylistApi
+import com.mugss.core.network.api.spotify.SpotifyApi
 import com.mugss.core.network.internal.MuGssApi
 import com.mugss.core.network.internal.firebase.user.UserStoreImpl
 import dagger.Binds
@@ -35,7 +35,11 @@ import kotlin.io.encoding.ExperimentalEncodingApi
 internal interface NetworkModule {
 
     @Binds
-    fun bindPlaylistApi(muGssApi: MuGssApi): PlaylistApi
+    fun bindPlaylistApi(muGssApi: MuGssApi): SpotifyApi
+
+    @Singleton
+    @Binds
+    fun userStore(userStoreImpl: UserStoreImpl): UserStore
 
     @Singleton
     @Binds

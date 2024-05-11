@@ -1,19 +1,7 @@
-package com.mugss.core.network.api.playlist;
+package com.mugss.core.network.api.spotify
 
-import kotlinx.serialization.SerialName;
-import kotlinx.serialization.Serializable;
-
-@Serializable
-data class GetPlaylistByIdResponse(
-    @SerialName("items")
-    val items: List<TracksDataModel>
-)
-
-@Serializable
-data class TracksDataModel(
-    @SerialName("track")
-    val track: TrackDataModel
-)
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
 @Serializable
 data class TrackDataModel(
