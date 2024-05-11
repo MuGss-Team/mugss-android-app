@@ -2,6 +2,7 @@ package com.mugss.mugss.app.authorized.internal.home.internal.presentation
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -11,6 +12,7 @@ import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -23,12 +25,17 @@ import com.mugss.core.compose.theme.typo.shadow.withShadow
 import com.mugss.mugss.R
 
 @Composable
-fun HomeScreen() {
+fun HomeScreen(
+    navigateToModeSelection: () -> Unit,
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
             .background(MuGssTheme.colors.primary)
             .safeDrawingPadding()
+            .pointerInput(navigateToModeSelection) {
+                detectTapGestures { navigateToModeSelection() }
+            }
     ) {
         Text(
             modifier = Modifier
@@ -44,7 +51,7 @@ fun HomeScreen() {
             modifier = Modifier.fillMaxWidth(),
             painter = painterResource(id = MuGssDrawable.main_duck),
             contentDescription = null,
-            contentScale = ContentScale.Fit
+            contentScale = ContentScale.FillWidth,
         )
         Spacer(modifier = Modifier.weight(1f))
         Text(
@@ -57,6 +64,5 @@ fun HomeScreen() {
             color = MuGssTheme.colors.white,
             textAlign = TextAlign.Center,
         )
-
     }
 }

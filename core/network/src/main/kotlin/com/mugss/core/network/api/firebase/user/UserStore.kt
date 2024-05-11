@@ -1,7 +1,6 @@
 package com.mugss.core.network.api.firebase.user
 
-import com.google.firebase.firestore.CollectionReference
+import javax.inject.Qualifier
 
-interface UserStore {
-    val firestoreReferences: CollectionReference
-}
+@Qualifier
+annotation class UserStore

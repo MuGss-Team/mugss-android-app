@@ -1,4 +1,4 @@
-package com.mugss.core.network.api.firebase.auth
+package com.mugss.core.network.api.firebase
 
 import com.google.android.gms.tasks.Task
 import kotlinx.coroutines.Dispatchers

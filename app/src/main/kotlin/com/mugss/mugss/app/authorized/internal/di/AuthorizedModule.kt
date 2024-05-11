@@ -5,6 +5,9 @@ import com.mugss.core.navigation.AuthorizedNavFactory
 import com.mugss.mugss.app.authorized.internal.data.UserInfoRepository
 import com.mugss.mugss.app.authorized.internal.data.UserInfoRepositoryImpl
 import com.mugss.mugss.app.authorized.internal.home.internal.navigation.HomeNavigationFactory
+import com.mugss.mugss.app.authorized.internal.mode.internal.data.ModesRepository
+import com.mugss.mugss.app.authorized.internal.mode.internal.data.ModesRepositoryImpl
+import com.mugss.mugss.app.authorized.internal.mode.internal.navigation.SelectionModeNavFactory
 import com.mugss.mugss.app.authorized.internal.navigation.AuthorizedGraphNavFactory
 import dagger.Binds
 import dagger.Module
@@ -27,4 +30,11 @@ internal interface AuthorizedModule {
     @Binds
     @IntoSet
     fun bindHomeNavFactory(homeNavigationFactory: HomeNavigationFactory): AuthorizedNavFactory
+
+    @Binds
+    @IntoSet
+    fun bindSelectionModeNavFactory(selectionModeNavFactory: SelectionModeNavFactory): AuthorizedNavFactory
+
+    @Binds
+    fun bindModesRepository(modesRepositoryImpl: ModesRepositoryImpl): ModesRepository
 }

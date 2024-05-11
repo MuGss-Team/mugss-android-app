@@ -118,6 +118,7 @@ dependencies {
     implementation(libs.firebase.firestore)
     implementation(libs.firebase.firestore)
     implementation(libs.google.id)
+    implementation(libs.kotlinx.collections.immutable)
 
     implementation(project(":core:data"))
     implementation(project(":core:network"))

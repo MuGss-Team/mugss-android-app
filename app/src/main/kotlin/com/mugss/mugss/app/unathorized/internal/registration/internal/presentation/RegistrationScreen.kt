@@ -1,27 +1,21 @@
 package com.mugss.mugss.app.unathorized.internal.registration.internal.presentation
 
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawingPadding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.mugss.core.compose.MuGssDrawable
 import com.mugss.core.compose.buttons.MugssTextButton
-import com.mugss.core.compose.icons.IconWithShadow
+import com.mugss.core.compose.icons.IconBack
 import com.mugss.core.compose.input.MuGssInput
 import com.mugss.core.compose.theme.colors.radialGradientPrimaryBackground
 import com.mugss.mugss.R
@@ -47,24 +41,13 @@ internal fun RegistrationScreen(
             .safeDrawingPadding()
             .verticalScroll(rememberScrollState()),
     ) {
-        IconWithShadow(
+        IconBack(
             modifier = Modifier
                 .padding(
                     start = 16.dp,
                     top = 10.dp
-                )
-                .size(48.dp)
-                .clickable(
-                    onClick = navController::popBackStack,
-                    indication = rememberRipple(
-                        radius = 24.dp,
-                        bounded = false,
-                    ),
-                    interactionSource = remember {
-                        MutableInteractionSource()
-                    }
                 ),
-            iconId = MuGssDrawable.ic_arrow_48
+            onClick = navController::popBackStack
         )
         Spacer(modifier = Modifier.weight(1f))
         UnauthorizedWidget(

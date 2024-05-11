@@ -2,13 +2,14 @@ package com.mugss.core.network.internal.di
 
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
+import com.google.firebase.firestore.firestore
 import com.mugss.core.data.token.TokenStore
 import com.mugss.core.network.api.ClientId
 import com.mugss.core.network.api.ClientSecret
+import com.mugss.core.network.api.firebase.modes.ModesStore
 import com.mugss.core.network.api.firebase.user.UserStore
 import com.mugss.core.network.api.playlist.PlaylistApi
 import com.mugss.core.network.internal.MuGssApi
-import com.mugss.core.network.internal.firebase.user.UserStoreImpl
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -36,10 +37,6 @@ internal interface NetworkModule {
 
     @Binds
     fun bindPlaylistApi(muGssApi: MuGssApi): PlaylistApi
-
-    @Singleton
-    @Binds
-    fun userStore(userStoreImpl: UserStoreImpl): UserStore
 
     companion object {
 
@@ -82,6 +79,20 @@ internal interface NetworkModule {
             }
         }
 
+        @Singleton
+        @Provides
+        @ModesStore
+        fun provideModesStore() = Firebase.firestore.collection(
+            MODES_STORE
+        )
+
+        @Singleton
+        @Provides
+        @UserStore
+        fun provideUserStore() = Firebase.firestore.collection(
+            USERS_STORE
+        )
+
         private fun HttpClientConfig<AndroidEngineConfig>.installDefault() {
             install(Logging)
             install(ContentNegotiation) {
@@ -103,5 +114,7 @@ internal interface NetworkModule {
         private const val TIME_OUT = 5000
         private const val BASE_URL = "https://api.spotify.com/v1/"
         private const val TOKEN_URL = "https://accounts.spotify.com/api/token/"
+        private const val MODES_STORE = "modes"
+        private const val USERS_STORE = "users"
     }
 }
