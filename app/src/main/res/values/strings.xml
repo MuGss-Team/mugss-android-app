@@ -10,4 +10,6 @@
     <string name="password">Пароль:</string>
     <string name="password_confirmation">Подтверждение пароля:</string>
     <string name="registrate">Зарегистрироваться</string>
+    <string name="guess_the_song">Угадай \nпесню</string>
+    <string name="touch_to_play">Нажмите, чтобы играть</string>
 </resources>

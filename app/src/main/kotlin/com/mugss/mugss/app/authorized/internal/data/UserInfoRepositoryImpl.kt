@@ -4,12 +4,16 @@ import com.google.firebase.auth.FirebaseAuth
 import com.mugss.core.network.api.firebase.auth.makeFirebaseRequest
 import com.mugss.core.network.api.firebase.user.User
 import com.mugss.core.network.api.firebase.user.UserStore
+import com.mugss.mugss.app.unathorized.internal.data.credential.CredentialManagerWrapper
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.tasks.await
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class UserInfoRepositoryImpl @Inject constructor(
+internal class UserInfoRepositoryImpl @Inject constructor(
     private val firebaseAuth: FirebaseAuth,
     private val userStore: UserStore,
+    private val credentialManagerWrapper: CredentialManagerWrapper,
 ) : UserInfoRepository {
 
     override suspend fun getCurrentUser(): User? = makeFirebaseRequest {
@@ -21,5 +25,10 @@ class UserInfoRepositoryImpl @Inject constructor(
 
     override fun isAuthorized(): Boolean = firebaseAuth.currentUser != null
 
-    override fun signOut() = firebaseAuth.signOut()
+    override suspend fun signOut() {
+        withContext(Dispatchers.Main.immediate) {
+            firebaseAuth.signOut()
+        }
+        credentialManagerWrapper.signOut()
+    }
 }

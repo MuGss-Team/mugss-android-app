@@ -8,5 +8,5 @@ interface UserInfoRepository {
 
     fun isAuthorized(): Boolean
 
-    fun signOut()
+    suspend fun signOut()
 }

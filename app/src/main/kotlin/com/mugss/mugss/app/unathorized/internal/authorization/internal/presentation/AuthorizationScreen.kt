@@ -7,18 +7,23 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawingPadding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.ripple.rememberRipple
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.mugss.core.compose.MuGssDrawable
 import com.mugss.core.compose.buttons.MugssTextButton
 import com.mugss.core.compose.checkbox.CheckboxWithText
 import com.mugss.core.compose.theme.MuGssTheme
@@ -99,6 +104,25 @@ internal fun AuthorizationScreen(
                 style = MuGssTheme.typography.bodyM,
                 color = MuGssTheme.colors.gray,
                 textAlign = TextAlign.Center,
+            )
+            Icon(
+                modifier = Modifier
+                    .align(Alignment.CenterHorizontally)
+                    .padding(bottom = 40.dp)
+                    .size(48.dp)
+                    .clickable(
+                        onClick = authorizationViewModel::onAuthGoogle,
+                        indication = rememberRipple(
+                            radius = 24.dp,
+                            bounded = false,
+                        ),
+                        interactionSource = remember {
+                            MutableInteractionSource()
+                        }
+                    ),
+                painter = painterResource(id = MuGssDrawable.ic_google_48),
+                contentDescription = null,
+                tint = MuGssTheme.colors.primary,
             )
         }
     }

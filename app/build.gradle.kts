@@ -39,6 +39,7 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            signingConfig = signingConfigs.getByName("debug")
         }
     }
     compileOptions {
@@ -95,6 +96,8 @@ dependencies {
         implementation(lifecycle.runtime)
         implementation(lifecycle.runtime.compose)
         implementation(lifecycle.viewModelCompose)
+        implementation(credentials)
+        implementation(credentials.auth)
 
         //Compose
         implementation(activity.compose)
@@ -113,6 +116,8 @@ dependencies {
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.auth)
     implementation(libs.firebase.firestore)
+    implementation(libs.firebase.firestore)
+    implementation(libs.google.id)
 
     implementation(project(":core:data"))
     implementation(project(":core:network"))
