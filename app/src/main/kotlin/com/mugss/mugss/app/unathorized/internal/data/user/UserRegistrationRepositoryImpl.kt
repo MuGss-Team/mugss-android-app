@@ -1,6 +1,7 @@
-package com.mugss.mugss.app.unathorized.internal.data
+package com.mugss.mugss.app.unathorized.internal.data.user
 
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.GoogleAuthProvider
 import com.mugss.core.network.api.firebase.auth.makeFirebaseRequest
 import com.mugss.core.network.api.firebase.user.User
 import com.mugss.core.network.api.firebase.user.UserStore
@@ -17,11 +18,10 @@ internal class UserRegistrationRepositoryImpl @Inject constructor(
         email: String,
         password: String
     ): Result<Unit> = makeFirebaseRequest {
-        val user = firebaseAuth.createUserWithEmailAndPassword(
+        firebaseAuth.createUserWithEmailAndPassword(
             email,
             password
-        ).await().user
-        user?.let {
+        ).await().user?.let {
             setUserData(
                 uuid = it.uid,
                 email = email,
@@ -41,13 +41,32 @@ internal class UserRegistrationRepositoryImpl @Inject constructor(
         ).await()
     }
 
+    override suspend fun authWithGoogle(
+        googleIdToken: String
+    ): Result<Unit> = makeFirebaseRequest {
+        firebaseAuth.signInWithCredential(
+            GoogleAuthProvider.getCredential(
+                googleIdToken,
+                null
+            )
+        ).await().user?.let {
+            setUserData(
+                uuid = it.uid,
+                email = it.email,
+                login = it.displayName,
+                checkExistingRequired = false,
+            )
+        }
+    }
+
     private suspend fun setUserData(
         uuid: String,
-        email: String,
-        login: String
+        email: String?,
+        login: String?,
+        checkExistingRequired: Boolean = true,
     ) {
         val userDocument = userStore.firestoreReferences.document(uuid)
-        if (userDocument.get().await().exists()) {
+        if (checkExistingRequired && userDocument.get().await().exists()) {
             throw UserAlreadyExistException()
         }
         userDocument.set(

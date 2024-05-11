@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.SavedStateHandleSaveableApi
 import androidx.lifecycle.viewmodel.compose.saveable
-import com.mugss.mugss.app.unathorized.internal.data.UserRegistrationRepository
+import com.mugss.mugss.app.unathorized.internal.data.user.UserRegistrationRepository
 import com.mugss.mugss.app.unathorized.internal.registration.internal.contract.RegistrationState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch

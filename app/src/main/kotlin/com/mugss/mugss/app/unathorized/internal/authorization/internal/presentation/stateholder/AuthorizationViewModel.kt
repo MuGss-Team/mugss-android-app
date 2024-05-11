@@ -9,8 +9,10 @@ import androidx.lifecycle.viewmodel.compose.saveable
 import com.mugss.core.data.token.UserPrefs
 import com.mugss.mugss.app.authorized.api.navigation.AuthorizedGraph
 import com.mugss.mugss.app.unathorized.internal.authorization.internal.presentation.contract.AuthorizationState
-import com.mugss.mugss.app.unathorized.internal.data.UserRegistrationRepository
+import com.mugss.mugss.app.unathorized.internal.data.credential.CredentialManagerWrapper
+import com.mugss.mugss.app.unathorized.internal.data.user.UserRegistrationRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
@@ -22,6 +24,7 @@ internal class AuthorizationViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
     private val userRegistrationRepository: UserRegistrationRepository,
     private val userPrefs: UserPrefs,
+    private val credentialManagerWrapper: CredentialManagerWrapper,
 ) : ViewModel() {
 
     @OptIn(SavedStateHandleSaveableApi::class)
@@ -29,7 +32,10 @@ internal class AuthorizationViewModel @Inject constructor(
         mutableStateOf(AuthorizationState())
     }
 
-    private val _navigationFlow: MutableSharedFlow<Any> = MutableSharedFlow()
+    private val _navigationFlow: MutableSharedFlow<Any> = MutableSharedFlow(
+        extraBufferCapacity = 1,
+        onBufferOverflow = BufferOverflow.DROP_OLDEST,
+    )
 
     val navigationFlow: SharedFlow<Any>
         get() = _navigationFlow.asSharedFlow()
@@ -51,8 +57,7 @@ internal class AuthorizationViewModel @Inject constructor(
             state.login,
             state.password
         ).onSuccess {
-            userPrefs.rememberMe = state.rememberMe
-            _navigationFlow.emit(AuthorizedGraph)
+            onSuccessAuth()
         }
     }
 
@@ -63,4 +68,18 @@ internal class AuthorizationViewModel @Inject constructor(
             rememberMe = rememberMe
         )
     }
+
+    fun onAuthGoogle() = viewModelScope.launch {
+        credentialManagerWrapper.getGoogleIdToken().onSuccess {
+            userRegistrationRepository.authWithGoogle(it.idToken).onSuccess {
+                onSuccessAuth()
+            }
+        }
+    }
+
+    private fun onSuccessAuth() {
+        userPrefs.rememberMe = state.rememberMe
+        _navigationFlow.tryEmit(AuthorizedGraph)
+    }
+
 }

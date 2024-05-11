@@ -1,4 +1,4 @@
-package com.mugss.mugss.app.unathorized.internal.data
+package com.mugss.mugss.app.unathorized.internal.data.user
 
 internal interface UserRegistrationRepository {
 
@@ -6,6 +6,10 @@ internal interface UserRegistrationRepository {
         login: String,
         email: String,
         password: String,
+    ): Result<Unit>
+
+    suspend fun authWithGoogle(
+        googleIdToken: String,
     ): Result<Unit>
 
     suspend fun auth(
