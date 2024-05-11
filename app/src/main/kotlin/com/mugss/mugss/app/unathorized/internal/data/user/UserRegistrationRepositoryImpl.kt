@@ -2,7 +2,8 @@ package com.mugss.mugss.app.unathorized.internal.data.user
 
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
-import com.mugss.core.network.api.firebase.auth.makeFirebaseRequest
+import com.google.firebase.firestore.CollectionReference
+import com.mugss.core.network.api.firebase.makeFirebaseRequest
 import com.mugss.core.network.api.firebase.user.User
 import com.mugss.core.network.api.firebase.user.UserStore
 import kotlinx.coroutines.tasks.await
@@ -10,7 +11,8 @@ import javax.inject.Inject
 
 internal class UserRegistrationRepositoryImpl @Inject constructor(
     private val firebaseAuth: FirebaseAuth,
-    private val userStore: UserStore,
+    @UserStore
+    private val userStore: CollectionReference,
 ) : UserRegistrationRepository {
 
     override suspend fun register(
@@ -65,7 +67,7 @@ internal class UserRegistrationRepositoryImpl @Inject constructor(
         login: String?,
         checkExistingRequired: Boolean = true,
     ) {
-        val userDocument = userStore.firestoreReferences.document(uuid)
+        val userDocument = userStore.document(uuid)
         if (checkExistingRequired && userDocument.get().await().exists()) {
             throw UserAlreadyExistException()
         }
@@ -80,7 +82,7 @@ internal class UserRegistrationRepositoryImpl @Inject constructor(
     private suspend fun requireUserEmail(
         login: String
     ) = requireNotNull(
-        userStore.firestoreReferences.whereEqualTo(
+        userStore.whereEqualTo(
             LOGIN_FIELD,
             login
         ).get().await().first().toObject(User::class.java).email
