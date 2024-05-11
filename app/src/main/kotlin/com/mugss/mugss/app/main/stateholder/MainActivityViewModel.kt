@@ -31,7 +31,7 @@ class MainActivityViewModel @Inject constructor(
         tokenRefresher.refreshToken()
     }
 
-    fun onCreate() {
+    fun onCreate() = viewModelScope.launch {
         if (!userPrefs.rememberMe) {
             userInfoRepository.signOut()
         }
