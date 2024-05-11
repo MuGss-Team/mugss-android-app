@@ -42,7 +42,7 @@ internal class MuGssApi @Inject constructor(
             }
         }
     }
-
+    
     override suspend fun getTracksByQuery(query: String) = withContext(Dispatchers.IO) {
         requestRetrier.sendRetryingRequest {
             getResponseResult<GetTracksBySearchResponse> {

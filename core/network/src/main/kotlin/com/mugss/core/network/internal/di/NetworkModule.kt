@@ -41,6 +41,10 @@ internal interface NetworkModule {
     @Binds
     fun userStore(userStoreImpl: UserStoreImpl): UserStore
 
+    @Singleton
+    @Binds
+    fun userStore(userStoreImpl: UserStoreImpl): UserStore
+
     companion object {
 
         @Singleton
