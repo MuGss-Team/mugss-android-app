@@ -4,7 +4,7 @@ import com.mugss.core.data.token.TokenStore
 import com.mugss.core.network.api.ClientId
 import com.mugss.core.network.api.ClientSecret
 import com.mugss.core.network.api.MuGssApi
-import com.mugss.core.network.api.playlist.PlaylistApi
+import com.mugss.core.network.api.spotify.SpotifyApi
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -31,7 +31,7 @@ import kotlin.io.encoding.ExperimentalEncodingApi
 interface NetworkModule {
 
     @Binds
-    fun bindPlaylistApi(muGssApi: MuGssApi): PlaylistApi
+    fun bindPlaylistApi(muGssApi: MuGssApi): SpotifyApi
 
     companion object {
 
