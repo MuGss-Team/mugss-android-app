@@ -13,4 +13,5 @@
     <string name="guess_the_song">Угадай \nпесню</string>
     <string name="touch_to_play">Нажмите, чтобы играть</string>
     <string name="chose_mode">Выберите\nрежим</string>
+    <string name="round_top_bar">%d раунд</string>
 </resources>

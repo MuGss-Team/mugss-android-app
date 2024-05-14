@@ -4,6 +4,9 @@ import com.mugss.core.navigation.AppNavFactory
 import com.mugss.core.navigation.AuthorizedNavFactory
 import com.mugss.mugss.app.authorized.internal.data.UserInfoRepository
 import com.mugss.mugss.app.authorized.internal.data.UserInfoRepositoryImpl
+import com.mugss.mugss.app.authorized.internal.game.internal.data.PlaylistRepository
+import com.mugss.mugss.app.authorized.internal.game.internal.data.PlaylistRepositoryImpl
+import com.mugss.mugss.app.authorized.internal.game.internal.navigation.GameScreenNavFactory
 import com.mugss.mugss.app.authorized.internal.home.internal.navigation.HomeNavigationFactory
 import com.mugss.mugss.app.authorized.internal.mode.internal.data.ModesRepository
 import com.mugss.mugss.app.authorized.internal.mode.internal.data.ModesRepositoryImpl
@@ -37,4 +40,11 @@ internal interface AuthorizedModule {
 
     @Binds
     fun bindModesRepository(modesRepositoryImpl: ModesRepositoryImpl): ModesRepository
+
+    @Binds
+    fun bindPlaylistRepository(playlistRepositoryImpl: PlaylistRepositoryImpl): PlaylistRepository
+
+    @Binds
+    @IntoSet
+    fun bindGameScreenNavFactory(gameScreenNavFactory: GameScreenNavFactory): AuthorizedNavFactory
 }

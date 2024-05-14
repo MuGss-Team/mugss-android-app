@@ -7,6 +7,7 @@ import com.mugss.core.data.token.TokenStore
 import com.mugss.core.network.api.ClientId
 import com.mugss.core.network.api.ClientSecret
 import com.mugss.core.network.api.firebase.modes.ModesStore
+import com.mugss.core.network.api.firebase.playlist.PlaylistStore
 import com.mugss.core.network.api.firebase.user.UserStore
 import com.mugss.core.network.api.spotify.SpotifyApi
 import com.mugss.core.network.internal.MuGssApi
@@ -97,6 +98,13 @@ internal interface NetworkModule {
             USERS_STORE
         )
 
+        @Singleton
+        @Provides
+        @PlaylistStore
+        fun providePlaylistStore() = Firebase.firestore.collection(
+            PLAYLIST_STORE
+        )
+
         private fun HttpClientConfig<AndroidEngineConfig>.installDefault() {
             install(Logging)
             install(ContentNegotiation) {
@@ -120,5 +128,6 @@ internal interface NetworkModule {
         private const val TOKEN_URL = "https://accounts.spotify.com/api/token/"
         private const val MODES_STORE = "modes"
         private const val USERS_STORE = "users"
+        private const val PLAYLIST_STORE = "playlists"
     }
 }

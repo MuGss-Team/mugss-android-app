@@ -1,7 +1,6 @@
 package com.mugss.mugss.app.main
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -41,10 +40,6 @@ class MainActivity : ComponentActivity() {
 private fun AppGraph(
     appNavFactories: ImmutableSet<AppNavFactory>,
 ) {
-    Log.d(
-        "Nav",
-        appNavFactories.toString()
-    )
     MuGssTheme {
         val navController = rememberNavController()
         NavHost(

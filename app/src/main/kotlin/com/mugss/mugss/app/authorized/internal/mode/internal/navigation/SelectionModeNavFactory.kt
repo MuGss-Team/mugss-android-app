@@ -5,7 +5,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import com.mugss.core.navigation.AuthorizedNavFactory
 import com.mugss.mugss.app.authorized.internal.mode.api.navigation.SelectionMode
-import com.mugss.mugss.app.authorized.internal.mode.internal.SelectionModeScreen
+import com.mugss.mugss.app.authorized.internal.mode.internal.presentation.SelectionModeScreen
 import javax.inject.Inject
 
 internal class SelectionModeNavFactory @Inject constructor() : AuthorizedNavFactory {
