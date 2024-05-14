@@ -1,4 +1,4 @@
-package com.mugss.mugss.app.authorized.internal.mode.internal
+package com.mugss.mugss.app.authorized.internal.mode.internal.presentation
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.Crossfade
@@ -6,13 +6,11 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -31,7 +29,6 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -40,12 +37,14 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.mugss.core.compose.MuGssDrawable
+import com.mugss.core.compose.cards.MuGssCard
 import com.mugss.core.compose.icons.IconBack
 import com.mugss.core.compose.loading.LoadingScreen
 import com.mugss.core.compose.theme.MuGssTheme
 import com.mugss.core.compose.theme.typo.shadow.ShadowOffset
 import com.mugss.core.compose.theme.typo.shadow.withShadow
 import com.mugss.mugss.R
+import com.mugss.mugss.app.authorized.internal.game.api.navigation.Game
 import com.mugss.mugss.app.authorized.internal.mode.internal.presentation.contract.ModePresentation
 import com.mugss.mugss.app.authorized.internal.mode.internal.presentation.contract.SelectionModeState
 import com.mugss.mugss.app.authorized.internal.mode.internal.presentation.stateholder.SelectionModeViewModel
@@ -67,7 +66,8 @@ internal fun SelectionModeScreen(
             is SelectionModeState.Loading -> LoadingScreen()
             is SelectionModeState.Content -> Content(
                 onBack = navController::popBackStack,
-                modes = state.modes
+                modes = state.modes,
+                onPlaylistNavigate = { navController.navigate(Game(it)) }
             )
         }
     }
@@ -76,6 +76,7 @@ internal fun SelectionModeScreen(
 @Composable
 private fun Content(
     onBack: () -> Unit,
+    onPlaylistNavigate: (id: String) -> Unit,
     modes: ImmutableList<ModePresentation>,
 ) {
     Column(
@@ -105,14 +106,22 @@ private fun Content(
             verticalArrangement = Arrangement.spacedBy(22.dp),
         ) {
             items(modes) {
-                ModeCard(mode = it)
+                ModeItem(
+                    mode = it,
+                    onPlaylistNavigate = onPlaylistNavigate
+                )
             }
             item {
                 MuGssCard(
-                    horizontalArrangement = Arrangement.SpaceAround,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 24.dp)
+                        .height(166.dp)
                 ) {
                     Icon(
-                        modifier = Modifier.size(96.dp),
+                        modifier = Modifier
+                            .align(Alignment.Center)
+                            .size(96.dp),
                         painter = painterResource(id = MuGssDrawable.ic_plus_96),
                         contentDescription = null,
                         tint = MuGssTheme.colors.white,
@@ -124,58 +133,72 @@ private fun Content(
 }
 
 @Composable
-private fun ModeCard(
+private fun ModeItem(
     mode: ModePresentation,
+    onPlaylistNavigate: (id: String) -> Unit,
 ) {
-    Box(
-        modifier = Modifier.height(IntrinsicSize.Min)
-    ) {
-        val scrollState = rememberScrollState()
-        MuGssCard(
-            modifier = Modifier
-                .padding(horizontal = 10.dp)
-                .padding(
-                    top = 6.dp,
-                    bottom = 10.dp
-                )
-        ) {
-            Box(
+    val scrollState = rememberScrollState()
+    ModeCard(
+        onPlaylistNavigate = { onPlaylistNavigate(mode.playlistId) },
+        textGradientVisible = scrollState.canScrollForward,
+        content = {
+            Row(
                 modifier = Modifier
-                    .padding(end = 16.dp)
-                    .size(104.dp)
-                    .clip(CircleShape)
-                    .background(MuGssTheme.colors.white),
-                contentAlignment = Alignment.Center,
+                    .fillMaxSize()
+                    .padding(horizontal = 10.dp)
+                    .padding(
+                        top = 6.dp,
+                        bottom = 10.dp
+                    ),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween,
             ) {
-                Image(
-                    painter = painterResource(id = mode.icon),
-                    contentDescription = null
-                )
-            }
-            Column {
-                Text(
-                    text = mode.title,
-                    style = MuGssTheme.typography.bodyXL.withShadow(shadowOffset = ShadowOffset.SMALL),
-                    color = MuGssTheme.colors.white,
-                    textAlign = TextAlign.Center,
-                )
-                Text(
-                    modifier = Modifier.verticalScroll(scrollState),
-                    text = mode.description,
-                    style = MuGssTheme.typography.bodyS,
-                    color = MuGssTheme.colors.white,
-                )
+                Box(
+                    modifier = Modifier
+                        .padding(end = 16.dp)
+                        .size(104.dp)
+                        .clip(CircleShape)
+                        .background(MuGssTheme.colors.white),
+                    contentAlignment = Alignment.Center,
+                ) {
+                    Image(
+                        painter = painterResource(id = mode.icon),
+                        contentDescription = null
+                    )
+                }
+                Column {
+                    Text(
+                        text = mode.title,
+                        style = MuGssTheme.typography.bodyXL.withShadow(shadowOffset = ShadowOffset.SMALL),
+                        color = MuGssTheme.colors.white,
+                        textAlign = TextAlign.Center,
+                    )
+                    Text(
+                        modifier = Modifier.verticalScroll(scrollState),
+                        text = mode.description,
+                        style = MuGssTheme.typography.bodyS,
+                        color = MuGssTheme.colors.white,
+                    )
+                }
             }
         }
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 24.dp)
-                .fillMaxHeight()
-                .clip(MuGssTheme.shapes.roundedCorner20),
-            contentAlignment = Alignment.BottomEnd,
-        ) {
-            AnimatedVisibility(visible = scrollState.canScrollForward) {
+    )
+}
+
+@Composable
+private fun ModeCard(
+    content: @Composable BoxScope.() -> Unit,
+    onPlaylistNavigate: () -> Unit,
+    textGradientVisible: Boolean,
+) {
+    MuGssCard(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 24.dp)
+            .height(166.dp),
+        cardContent = content,
+        additionalBottomContent = {
+            AnimatedVisibility(visible = textGradientVisible) {
                 Spacer(
                     modifier = Modifier
                         .height(30.dp)
@@ -190,38 +213,7 @@ private fun ModeCard(
                         )
                 )
             }
-        }
-    }
-}
-
-@Composable
-fun MuGssCard(
-    modifier: Modifier = Modifier,
-    horizontalArrangement: Arrangement.Horizontal = Arrangement.SpaceBetween,
-    content: @Composable RowScope.() -> Unit,
-) {
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 24.dp)
-            .height(166.dp)
-            .shadow(
-                elevation = 10.dp,
-                shape = MuGssTheme.shapes.roundedCorner20,
-            )
-            .background(
-                color = MuGssTheme.colors.backgroundComponents,
-                shape = MuGssTheme.shapes.roundedCorner20,
-            )
-            .then(modifier)
-    ) {
-        Row(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(horizontal = 10.dp),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = horizontalArrangement,
-            content = content,
-        )
-    }
+        },
+        onClick = onPlaylistNavigate,
+    )
 }

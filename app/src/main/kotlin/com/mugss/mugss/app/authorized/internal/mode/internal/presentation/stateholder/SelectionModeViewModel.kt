@@ -27,7 +27,7 @@ internal class SelectionModeViewModel @Inject constructor(
 
     fun fetchModes() = viewModelScope.launch {
         val minimumLoadingDelay = launch {
-            delay(2000)
+            delay(1000)
         }
         val result = async {
             modesRepository.geModes()
