@@ -8,6 +8,7 @@ androidx-lifecycle-compose = "2.7.0"
 androidx-lifecycle-runtime-compose = "2.7.0"
 androidx-navigation = "2.8.0-alpha08"
 androidx-security = "1.1.0-alpha06"
+androidx-splash = "1.0.1"
 androidx-test = "1.5.0"
 androidx-test-espresso = "3.5.1"
 androidx-test-ext-junit = "1.1.5"
@@ -84,6 +85,7 @@ androidx-test-ext-truth = { module = "androidx.test.ext:truth", version.ref = "a
 androidx-test-rules = { module = "androidx.test:rules", version.ref = "androidx-test" }
 androidx-credentials-auth = { module = "androidx.credentials:credentials-play-services-auth", version.ref = "androidx-credentials" }
 androidx-credentials = { module = "androidx.credentials:credentials", version.ref = "androidx-credentials" }
+androidx-splash = { module = "androidx.core:core-splashscreen", version.ref = "androidx-splash" }
 coil-kt-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
 google-android-material = { module = "com.google.android.material:material", version.ref = "material" }
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
