@@ -98,6 +98,7 @@ dependencies {
         implementation(lifecycle.viewModelCompose)
         implementation(credentials)
         implementation(credentials.auth)
+        implementation(splash)
 
         //Compose
         implementation(activity.compose)
