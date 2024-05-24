@@ -1,6 +1,7 @@
 package com.mugss.mugss.app.authorized.internal.tops.internal.data
 
 import com.google.firebase.firestore.CollectionReference
+import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.Query
 import com.mugss.core.network.api.firebase.makeFirebaseRequest
 import com.mugss.core.network.api.firebase.modes.Mode
@@ -28,6 +29,17 @@ internal class TopsRepositoryImpl @Inject constructor(
             .get().await()
             .toObjects(Position::class.java)
     }
+
+    override suspend fun saveResultInTopByModeTitle(login: String, score: Long, modeTitle: String): Result<DocumentReference> =
+        makeFirebaseRequest {
+            topsStore
+                .document(modeTitle)
+                .collection(TOP_COLLECTION)
+                .add(createTopPositionMap(login, score))
+                .await()
+        }
+
+    private fun createTopPositionMap(login: String, score: Long): Map<String, Any> = mapOf("login" to login, "score" to score)
 
     companion object {
         private const val TOP_COLLECTION = "top"
