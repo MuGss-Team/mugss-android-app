@@ -10,7 +10,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import com.mugss.core.compose.theme.MuGssTheme
 import com.mugss.core.navigation.AppNavFactory
-import com.mugss.mugss.app.authorized.api.navigation.AuthorizedGraph
 import com.mugss.mugss.app.main.stateholder.MainActivityViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.collections.immutable.ImmutableSet
@@ -30,7 +29,8 @@ class MainActivity : ComponentActivity() {
         }
         setContent {
             AppGraph(
-                appNavFactories = mainActivityViewModel.appNavFactories.toImmutableSet()
+                appNavFactories = mainActivityViewModel.appNavFactories.toImmutableSet(),
+                startDestination = mainActivityViewModel.getStartDestination()
             )
         }
     }
@@ -39,12 +39,13 @@ class MainActivity : ComponentActivity() {
 @Composable
 private fun AppGraph(
     appNavFactories: ImmutableSet<AppNavFactory>,
+    startDestination: Any
 ) {
     MuGssTheme {
         val navController = rememberNavController()
         NavHost(
             route = Main::class,
-            startDestination = AuthorizedGraph,
+            startDestination = startDestination,
             navController = navController,
         ) {
             appNavFactories.forEach {

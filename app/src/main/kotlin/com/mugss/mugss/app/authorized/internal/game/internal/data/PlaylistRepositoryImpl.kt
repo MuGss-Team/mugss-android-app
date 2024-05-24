@@ -7,15 +7,15 @@ import com.mugss.core.network.api.firebase.playlist.Playlist
 import com.mugss.core.network.api.firebase.playlist.PlaylistStore
 import com.mugss.core.network.api.firebase.playlist.PlaylistType
 import com.mugss.core.network.api.firebase.playlist.SpotifyPlaylist
-import com.mugss.core.network.api.playlist.PlaylistApi
-import com.mugss.core.network.api.playlist.TracksDataModel
+import com.mugss.core.network.api.spotify.PlaylistTrackDataModel
+import com.mugss.core.network.api.spotify.SpotifyApi
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
 internal class PlaylistRepositoryImpl @Inject constructor(
     @PlaylistStore
     private val playListStore: CollectionReference,
-    private val playlistApi: PlaylistApi,
+    private val playlistApi: SpotifyApi,
 ) : PlaylistRepository {
 
     override suspend fun getTracksById(id: String): Result<List<Track>> = makeFirebaseRequest {
@@ -39,7 +39,7 @@ internal class PlaylistRepositoryImpl @Inject constructor(
             .mapNotNull(::mapToTrack)
     }
 
-    private fun mapToTrack(tracksDataModel: TracksDataModel): Track? =
+    private fun mapToTrack(tracksDataModel: PlaylistTrackDataModel): Track? =
         try {
             Track(
                 previewUrl = requireNotNull(tracksDataModel.track.previewUrl),

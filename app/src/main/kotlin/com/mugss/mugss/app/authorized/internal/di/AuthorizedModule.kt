@@ -12,6 +12,9 @@ import com.mugss.mugss.app.authorized.internal.mode.internal.data.ModesRepositor
 import com.mugss.mugss.app.authorized.internal.mode.internal.data.ModesRepositoryImpl
 import com.mugss.mugss.app.authorized.internal.mode.internal.navigation.SelectionModeNavFactory
 import com.mugss.mugss.app.authorized.internal.navigation.AuthorizedGraphNavFactory
+import com.mugss.mugss.app.authorized.internal.tops.internal.data.TopsRepository
+import com.mugss.mugss.app.authorized.internal.tops.internal.data.TopsRepositoryImpl
+import com.mugss.mugss.app.authorized.internal.tops.internal.navigation.TopsNavFactory
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -39,7 +42,14 @@ internal interface AuthorizedModule {
     fun bindSelectionModeNavFactory(selectionModeNavFactory: SelectionModeNavFactory): AuthorizedNavFactory
 
     @Binds
+    @IntoSet
+    fun bindTopsNavFactory(topsNavFactory: TopsNavFactory): AuthorizedNavFactory
+
+    @Binds
     fun bindModesRepository(modesRepositoryImpl: ModesRepositoryImpl): ModesRepository
+
+    @Binds
+    fun bindTopsRepository(topsRepositoryImpl: TopsRepositoryImpl): TopsRepository
 
     @Binds
     fun bindPlaylistRepository(playlistRepositoryImpl: PlaylistRepositoryImpl): PlaylistRepository
