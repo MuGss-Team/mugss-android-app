@@ -8,6 +8,7 @@ import com.mugss.core.network.api.ClientId
 import com.mugss.core.network.api.ClientSecret
 import com.mugss.core.network.api.firebase.modes.ModesStore
 import com.mugss.core.network.api.firebase.playlist.PlaylistStore
+import com.mugss.core.network.api.firebase.top.TopsStore
 import com.mugss.core.network.api.firebase.user.UserStore
 import com.mugss.core.network.api.spotify.SpotifyApi
 import com.mugss.core.network.internal.MuGssApi
@@ -38,10 +39,6 @@ internal interface NetworkModule {
 
     @Binds
     fun bindPlaylistApi(muGssApi: MuGssApi): SpotifyApi
-
-    @Singleton
-    @Binds
-    fun userStore(userStoreImpl: UserStoreImpl): UserStore
 
     companion object {
 
@@ -105,6 +102,13 @@ internal interface NetworkModule {
             PLAYLIST_STORE
         )
 
+        @Singleton
+        @Provides
+        @TopsStore
+        fun provideTopsStore() = Firebase.firestore.collection(
+            TOPS_STORE
+        )
+
         private fun HttpClientConfig<AndroidEngineConfig>.installDefault() {
             install(Logging)
             install(ContentNegotiation) {
@@ -129,5 +133,6 @@ internal interface NetworkModule {
         private const val MODES_STORE = "modes"
         private const val USERS_STORE = "users"
         private const val PLAYLIST_STORE = "playlists"
+        private const val TOPS_STORE = "tops"
     }
 }
