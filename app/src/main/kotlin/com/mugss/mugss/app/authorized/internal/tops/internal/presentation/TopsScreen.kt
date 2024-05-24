@@ -1,6 +1,5 @@
 package com.mugss.mugss.app.authorized.internal.tops.internal.presentation
 
-import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -67,7 +66,6 @@ internal fun TopsScreen(navController: NavController, viewModel: TopsViewModel =
                 viewModel.getModes()
             }
             is TopsState.Content -> {
-                Log.d("strstr", "content")
                 val content = state as TopsState.Content
                 if (content.positions == null) {
                     viewModel.getTopByMode(content.modesTitle[selectedMode.intValue])
