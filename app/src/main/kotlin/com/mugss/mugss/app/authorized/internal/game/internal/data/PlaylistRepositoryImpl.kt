@@ -36,12 +36,14 @@ internal class PlaylistRepositoryImpl @Inject constructor(
             .getPlaylistById(spotifyPlaylistId)
             .getOrThrow()
             .items
-            .mapNotNull(::mapToTrack)
+            .mapIndexedNotNull(::mapToTrack)
+            .take(60)
     }
 
-    private fun mapToTrack(tracksDataModel: PlaylistTrackDataModel): Track? =
+    private fun mapToTrack(index: Int, tracksDataModel: PlaylistTrackDataModel): Track? =
         try {
             Track(
+                id = index,
                 previewUrl = requireNotNull(tracksDataModel.track.previewUrl),
                 author = tracksDataModel.track.artists.first().name,
                 name = tracksDataModel.track.name,

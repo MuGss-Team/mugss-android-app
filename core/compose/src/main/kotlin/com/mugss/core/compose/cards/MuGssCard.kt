@@ -11,6 +11,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.mugss.core.compose.modifier.optionalClickable
@@ -19,6 +20,7 @@ import com.mugss.core.compose.theme.MuGssTheme
 @Composable
 fun MuGssCard(
     modifier: Modifier = Modifier,
+    background: Color = MuGssTheme.colors.backgroundComponents,
     onClick: (() -> Unit)? = null,
     elevation: Dp = 10.dp,
     additionalBottomContent: (@Composable BoxScope.() -> Unit)? = null,
@@ -34,7 +36,7 @@ fun MuGssCard(
                     shape = MuGssTheme.shapes.roundedCorner20,
                 )
                 .background(
-                    color = MuGssTheme.colors.backgroundComponents,
+                    color = background,
                     shape = MuGssTheme.shapes.roundedCorner20,
                 ),
             content = cardContent,

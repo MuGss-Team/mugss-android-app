@@ -27,7 +27,6 @@ android {
 
 dependencies {
     with(libs.androidx.compose) {
-        implementation(platform(bom))
         implementation(ui)
         implementation(runtime)
         implementation(ui.graphics)
