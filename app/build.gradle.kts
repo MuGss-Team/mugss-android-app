@@ -102,12 +102,13 @@ dependencies {
 
         //Compose
         implementation(activity.compose)
-        implementation(platform(compose.bom))
         implementation(compose.ui)
         implementation(compose.material3)
         implementation(compose.ui.graphics)
         implementation(compose.ui.tooling.preview)
         implementation(navigation.compose)
+        implementation(media3.exoplayer)
+        implementation(compose.animation)
 
         debugImplementation(compose.ui.tooling)
         debugImplementation(compose.ui.test.manifest)

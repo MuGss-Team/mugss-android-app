@@ -22,10 +22,14 @@ internal class SelectionModeViewModel @Inject constructor(
     private val modesRepository: ModesRepository,
 ) : ViewModel() {
 
+    init {
+        fetchModes()
+    }
+
     var state: SelectionModeState by mutableStateOf(SelectionModeState.Loading)
         private set
 
-    fun fetchModes() = viewModelScope.launch {
+    private fun fetchModes() = viewModelScope.launch {
         val minimumLoadingDelay = launch {
             delay(1000)
         }

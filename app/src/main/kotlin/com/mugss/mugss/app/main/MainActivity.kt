@@ -10,6 +10,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import com.mugss.core.compose.theme.MuGssTheme
 import com.mugss.core.navigation.AppNavFactory
+import com.mugss.core.navigation.animations.defaultSlideEnterTransition
+import com.mugss.core.navigation.animations.defaultSlideExitTransition
+import com.mugss.core.navigation.animations.defaultSlidePopEnterTransition
+import com.mugss.core.navigation.animations.defaultSlidePopExitTransition
 import com.mugss.mugss.app.main.stateholder.MainActivityViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.collections.immutable.ImmutableSet
@@ -47,6 +51,10 @@ private fun AppGraph(
             route = Main::class,
             startDestination = startDestination,
             navController = navController,
+            exitTransition = { defaultSlideExitTransition() },
+            enterTransition = { defaultSlideEnterTransition() },
+            popEnterTransition = { defaultSlidePopEnterTransition() },
+            popExitTransition = { defaultSlidePopExitTransition() },
         ) {
             appNavFactories.forEach {
                 it.create(

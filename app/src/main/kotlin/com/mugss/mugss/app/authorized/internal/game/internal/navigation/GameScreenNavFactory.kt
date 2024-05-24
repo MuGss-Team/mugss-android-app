@@ -13,7 +13,16 @@ class GameScreenNavFactory @Inject constructor() : AuthorizedNavFactory {
 
     override fun create(navGraphBuilder: NavGraphBuilder, navController: NavController) {
         navGraphBuilder.composable<Game> {
-            GameScreen(it.toRoute<Game>().playListId)
+            GameScreen(
+                playlistId = it.toRoute<Game>().playListId,
+                onNavigate = { directions ->
+                    navController.navigate(directions) {
+                        popUpTo<Game> {
+                            inclusive = true
+                        }
+                    }
+                }
+            )
         }
     }
 }

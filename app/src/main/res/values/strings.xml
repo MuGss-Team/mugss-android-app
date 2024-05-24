@@ -14,5 +14,12 @@
     <string name="touch_to_play">Нажмите, чтобы играть</string>
     <string name="chose_mode">Выберите\nрежим</string>
     <string name="round_top_bar">%d раунд</string>
+    <string name="right">Правильно</string>
+    <string name="wrong">Неправильно</string>
+    <string name="total_score">Итого: %1d</string>
+    <string name="time">%02d:%02d</string>
+    <string name="yours_scores">Ваш\nрезультат</string>
+    <string name="scores_gained">Набрано очков</string>
+    <string name="songs_guessed">Угадано песен</string>
     <string name="tops"> Топ\nигроков</string>
 </resources>

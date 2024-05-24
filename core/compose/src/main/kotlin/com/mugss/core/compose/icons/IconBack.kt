@@ -28,6 +28,6 @@ fun IconBack(
                     MutableInteractionSource()
                 }
             ),
-        iconId = MuGssDrawable.ic_arrow_48
+        iconId = MuGssDrawable.ic_arrow_back_48
     )
 }
