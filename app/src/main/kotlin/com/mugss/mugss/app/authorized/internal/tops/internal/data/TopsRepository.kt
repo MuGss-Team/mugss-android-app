@@ -8,4 +8,6 @@ internal interface TopsRepository {
     suspend fun getModes(): Result<List<Mode>>
 
     suspend fun getTopByMode(modeTitle: String): Result<MutableList<Position>?>
+
+    suspend fun saveResultInTopByModeTitle(login: String, score: Long, modeTitle: String): Result<Boolean>
 }
